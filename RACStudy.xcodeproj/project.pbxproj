@@ -14,6 +14,7 @@
 		5811E1DF228002D2006C676A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5811E1DE228002D2006C676A /* Assets.xcassets */; };
 		5811E1E2228002D2006C676A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5811E1E0228002D2006C676A /* LaunchScreen.storyboard */; };
 		5811E1E5228002D2006C676A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811E1E4228002D2006C676A /* main.m */; };
+		5811E1ED2280248E006C676A /* SZRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811E1EC2280248E006C676A /* SZRootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		5811E1E1228002D2006C676A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5811E1E3228002D2006C676A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5811E1E4228002D2006C676A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5811E1EB2280248E006C676A /* SZRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZRootViewController.h; sourceTree = "<group>"; };
+		5811E1EC2280248E006C676A /* SZRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,8 @@
 				5811E1D6228002D1006C676A /* AppDelegate.m */,
 				5811E1D8228002D1006C676A /* ViewController.h */,
 				5811E1D9228002D1006C676A /* ViewController.m */,
+				5811E1EB2280248E006C676A /* SZRootViewController.h */,
+				5811E1EC2280248E006C676A /* SZRootViewController.m */,
 				5811E1DB228002D1006C676A /* Main.storyboard */,
 				5811E1DE228002D2006C676A /* Assets.xcassets */,
 				5811E1E0228002D2006C676A /* LaunchScreen.storyboard */,
@@ -84,7 +89,6 @@
 				29348F53BD3876E72CD0643C /* Pods-RACStudy.debug.xcconfig */,
 				4A51F2190BD43B194077A582 /* Pods-RACStudy.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -193,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5811E1DA228002D1006C676A /* ViewController.m in Sources */,
+				5811E1ED2280248E006C676A /* SZRootViewController.m in Sources */,
 				5811E1E5228002D2006C676A /* main.m in Sources */,
 				5811E1D7228002D1006C676A /* AppDelegate.m in Sources */,
 			);

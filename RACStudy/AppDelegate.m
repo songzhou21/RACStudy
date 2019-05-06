@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SZRootViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[SZRootViewController new]];
+    self.window.bounds = [UIScreen mainScreen].bounds;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

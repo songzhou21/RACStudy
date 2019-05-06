@@ -7,5 +7,6 @@ target 'RACStudy' do
 
   # Pods for RACStudy
   pod 'ReactiveObjC', '~> 3.1'
+  pod 'KVOController'
 
 end
