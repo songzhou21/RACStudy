@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import <ReactiveObjC/ReactiveObjC.h>
 
 @interface ViewController ()
+
+@property (nonatomic, copy) NSString *name;
 
 @end
 
@@ -16,7 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+
+    [RACObserve(self, name) subscribeNext:^(NSString  * _Nullable x) {
+        NSLog(@"%@", x);
+    }];
+    
+    self.name = @"songzhou";
 }
 
 
