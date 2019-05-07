@@ -10,25 +10,47 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <KVOController/KVOController.h>
 
+typedef void(^SZKVOChangeBlock)(id _Nullable value);
+
 @interface NSObject (SZKVO)
 
-- (void)sz_observeKeyPath:(NSString *)keyPath block:(NS_NOESCAPE void(^)(id value))block;
+- (void)sz_observeKeyPath:(NSString *)keyPath block:(NS_NOESCAPE SZKVOChangeBlock)block;
 
 @end
 
 @implementation NSObject (SZKVO)
 
-- (void)sz_observeKeyPath:(NSString *)keyPath block:(NS_NOESCAPE void(^)(id value))block {
+- (void)sz_observeKeyPath:(NSString *)keyPath block:(NS_NOESCAPE SZKVOChangeBlock)block {
     NSParameterAssert(block);
     
-    __weak __typeof__(block) weak_block = block;
     [self.KVOControllerNonRetaining observe:self keyPath:keyPath options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        __strong __typeof__(weak_block) block = weak_block;
-
         id newValue = change[NSKeyValueChangeNewKey];
 
         block([newValue isEqual:[NSNull null]] ? nil : newValue);
     }];
+}
+
+@end
+
+@interface FBKVOController (SZKVO)
+
+- (void)observe:(nullable id)object keyPath:(NSString *)keyPath onChange:(NS_NOESCAPE SZKVOChangeBlock)block;
+
+@end
+
+@implementation FBKVOController (SZKVO)
+
+- (void)observe:(nullable id)object keyPath:(NSString *)keyPath onChange:(NS_NOESCAPE SZKVOChangeBlock)block {
+    NSParameterAssert(block);
+    
+    [self observe:object
+          keyPath:keyPath
+          options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+            block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+                id newValue = change[NSKeyValueChangeNewKey];
+                
+                block([newValue isEqual:[NSNull null]] ? nil : newValue);
+            }];
 }
 
 @end
@@ -58,14 +80,19 @@
 //    }];
     
     
-    [self sz_observeKeyPath:@"name" block:^(id value) {
-        NSLog(@"kvo-controller: %@", value);
+//    [self sz_observeKeyPath:FBKVOKeyPath(self.name) block:^(id  _Nullable value) {
+//        NSLog(@"kvo-controller: %@", value);
+//    }];
+    
+    
+    [self.KVOControllerNonRetaining observe:self keyPath:FBKVOKeyPath(self.name) onChange:^(id  _Nullable value) {
+         NSLog(@"kvo-controller: %@", value);
     }];
     
-//    [self.KVOControllerNonRetaining observe:self keyPath:@"name" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+//    [self.KVOControllerNonRetaining observe:self keyPath:FBKVOKeyPath(self.name) options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
 //        NSLog(@"kvo-controller: %@", change[NSKeyValueChangeNewKey]);
 //    }];
-//    
+    
     self.name = @"songzhou";
 }
 
